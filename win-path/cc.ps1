@@ -3,7 +3,7 @@ Set-Variable -Name "ProjectDir" -Value "C:\MAIN\PROJECT\DIRECTORY"  # This is wh
 
 # Set Directory of your CookieCutters
 Set-Variable -Name "CookieCutterDir" -Value "C:\PATH\TO\COOKIECUTTERS" # This is where your CookieCutters Live
-Write-Output "Default Project Dir: $ProjectDir"
+Write-Host "Default Project Dir: $ProjectDir" -ForegroundColor DarkYellow
 
 
 $cookiecutterID = $args[0]
@@ -23,12 +23,12 @@ if ($CCExists -eq $True) {
     # Sets Location to CookieCutter Created Directory
     Set-Location $NewProject
 
-    Write-Output "Creating Virtual Environment in $NewProject"
+    Write-Host "Creating Virtual Environment in $NewProject" -ForegroundColor DarkYellow
 
     # Calls Custom venv alias
     venv
 
-    Write-Output ""
+    Write-Host "Install Pip Requirements..." -ForegroundColor DarkYellow
     pip install -r requirements.txt
 
     # Opens Up Created Folder in VS Code
@@ -36,10 +36,10 @@ if ($CCExists -eq $True) {
 }
 else {
     Write-Host " "
-    Write-Host "No Matching CookieCutter." -ForegroundColor Red
+    Write-Host "No Matching CookieCutter." -ForegroundColor DarkRed
     Write-Host " "
-    Write-Host "Avaiable CookieCutters:" -Separator '-' -ForegroundColor Cyan
-    Write-Host "-----------------------" -ForegroundColor Cyan
+    Write-Host "Avaiable CookieCutters:" -Separator '-' -ForegroundColor DarkRed
+    Write-Host "-----------------------" -ForegroundColor DarkRed
     Get-ChildItem $CookieCutterDir -directory -name
     Write-Host " "
 }
