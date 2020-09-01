@@ -3,7 +3,7 @@
     ```bash
     pip install --user cookiecutter
     ```
-2. Put this directory and CookieCutter in your windows PATH. 
+2. Put this directory and CookieCutter in your windows PATH. There are many ways to do this, just find some way to call the script without typing to whole path.
 3. Change CookieCutter config to reference `./CookieCutter/custom-config.yml`
 
 ## Setup CookieCutter Scripts
