@@ -25,12 +25,12 @@ This is the main cookiecutter script that takes in 1 argument that is the append
 This assumes that your templates are located in the `C:\PATH\TO\COOKIECUTTERS` that you previously set. This script also performs some other set-up tasks associated with creating a python project enviroment
 
 **Execution Order:**
-      1. Checks if CookieCutter template exists
-      2. Calls CookieCutter and takes in user inputs.
-      3. Traverses into directory and creates a virtual enviroment using the venv alias in this directory
-      4. Upgrade Pip
-      5. Install requirements.txt
-      6. Open project with VSCode
+ 1. Checks if CookieCutter template exists
+ 2. Calls CookieCutter and takes in user inputs.
+ 3. Traverses into directory and creates a virtual enviroment using the venv alias in this directory
+ 4. Upgrade Pip
+ 5. Install requirements.txt
+ 6. Open project with VSCode
 
 #### venv.ps1 - `venv`
 Creates a virtual enviroment in the current directory while upgrading pip and installing black and pylint.
