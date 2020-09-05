@@ -1,0 +1,23 @@
+#!/bin/bash
+Repo=$1
+ProjectDir="/media/data/Programming/Linux"
+
+cd $ProjectDir
+
+git clone $Repo
+
+NewProj=$(ls -td */ | head -1 | cut -d'/' -f1)
+cd $NewProj
+
+venv
+
+set -e
+source ./venv/bin/activate
+
+echo "Installing Requirements.txt"
+pip install -r requirements.txt
+
+# Opens Up Created Folder in VS Code
+code $PWD
+
+Robe_Art_Hardcopy3

@@ -1,0 +1,34 @@
+#!/bin/bash
+CookieCutter=$1
+ProjectDir="/media/data/Programming/Linux"
+CookieCutterDir="/media/data/Programming/dev-env/CookieCutters"
+
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+
+cd $ProjectDir
+echo Default Project Dir: $ProjectDir
+
+if test -d $CookieCutterDir/cookiecutter-$CookieCutter; then
+    cookiecutter cookiecutter-$CookieCutter
+    NewProj=$(ls -td */ | head -1 | cut -d'/' -f1)
+    cd $NewProj
+    
+    venv
+
+    set -e
+    source ./venv/bin/activate
+
+    echo "Installing Requirements.txt"
+    pip install -r requirements.txt
+
+    # Opens Up Created Folder in VS Code
+    code $PWD
+else
+    echo -e "\n${RED}cookiecutter-$CookieCutter Doesn't Exists${NC}\n"
+    echo -e "Avaiable CookieCutters"
+    echo -e "---------------------"
+    ls -d
+    echo ""
+fi
