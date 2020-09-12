@@ -5,7 +5,6 @@ $config = (Get-Content "$ScriptDir\config.json" -Raw) | ConvertFrom-Json
 
 $ProjectDir = $config.'ProjectDir'
 $CookieCutterDir = $config.'CookieCutterDir'
-
 # Print Project Directory
 Write-Host "Default Project Dir: $ProjectDir" -ForegroundColor DarkYellow
 
