@@ -1,8 +1,12 @@
-# Set Dump Directory for Projects
-Set-Variable -Name "ProjectDir" -Value "C:\MAIN\PROJECT\DIRECTORY"  # This is where your projects will be created
+# Read Config and Set Globals
+$ScriptDir = Split-Path $MyInvocation.MyCommand.Path -Parent
 
-# Set Directory of your CookieCutters
-Set-Variable -Name "CookieCutterDir" -Value "C:\PATH\TO\COOKIECUTTERS" # This is where your CookieCutters Live
+$config = (Get-Content "$ScriptDir\config.json" -Raw) | ConvertFrom-Json
+
+$ProjectDir = $config.'ProjectDir'
+$CookieCutterDir = $config.'CookieCutterDir'
+
+# Print Project Directory
 Write-Host "Default Project Dir: $ProjectDir" -ForegroundColor DarkYellow
 
 
@@ -10,7 +14,6 @@ $cookiecutterID = $args[0]
 Set-Location -Path $ProjectDir
 
 $CCPath = "$CookieCutterDir\cookiecutter-$cookiecutterID"
-
 
 $CCExists = Test-Path $CCPath
 

@@ -1,6 +1,10 @@
 #!/bin/bash
 $Repo = $args[0]
-Set-Variable -Name "ProjectDir" -Value "C:\MAIN\PROJECT\DIRECTORY"  # This is where your projects will be created
+$ScriptDir = Split-Path $MyInvocation.MyCommand.Path -Parent
+
+$config = (Get-Content "$ScriptDir\config.json" -Raw) | ConvertFrom-Json
+
+$ProjectDir = $config.'ProjectDir' # This is where your projects will be created
 
 Set-Location -Path $ProjectDir
 
