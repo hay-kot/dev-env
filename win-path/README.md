@@ -7,15 +7,14 @@
 3. Change CookieCutter config to reference `./CookieCutter/custom-config.yml`
 
 ## Setup CookieCutter Scripts
-1. Change Project Parent Director for ps1 scripts in `cc.ps1`
+1. Create a copy of the config-template.json and name it config.json. Change the values to match your machines settings
 
-   ```powershell
-   # Set Dump Directory for Projects
-   Set-Variable -Name "ProjectDir" -Value "C:\MAIN\PROJECT\DIRECTORY"  # This is where your projects will be created
+   ```json
+   {
+    "ProjectDir": "C:\\PATH\\TO\\PROJECTS",
+    "CookieCutterDir": "C:\\PATH\\TO\\COOKIECUTTERS"
+   }
 
-   # Set Directory of your CookieCutters
-   Set-Variable -Name "CookieCutterDir" -Value "C:\PATH\TO\COOKIECUTTERS" # This is where your CookieCutters Live
-   Write-Output "Default Project Dir: $ProjectDir"
    ```
 
 ## Description and Use
@@ -25,12 +24,12 @@ This is the main cookiecutter script that takes in 1 argument that is the append
 This assumes that your templates are located in the `C:\PATH\TO\COOKIECUTTERS` that you previously set. This script also performs some other set-up tasks associated with creating a python project enviroment
 
 **Execution Order:**
- 1. Checks if CookieCutter template exists
- 2. Calls CookieCutter and takes in user inputs.
- 3. Traverses into directory and creates a virtual enviroment using the venv alias in this directory
- 4. Upgrade Pip
- 5. Install requirements.txt
- 6. Open project with VSCode
+      1. Checks if CookieCutter template exists
+      2. Calls CookieCutter and takes in user inputs.
+      3. Traverses into directory and creates a virtual enviroment using the venv alias in this directory
+      4. Upgrade Pip
+      5. Install requirements.txt
+      6. Open project with VSCode
 
 #### venv.ps1 - `venv`
 Creates a virtual enviroment in the current directory while upgrading pip and installing black and pylint.
