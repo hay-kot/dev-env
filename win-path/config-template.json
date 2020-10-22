@@ -1,4 +1,8 @@
 {
     "ProjectDir": "C:\\PATH\\TO\\PROJECTS",
-    "CookieCutterDir": "C:\\PATH\\TO\\COOKIECUTTERS"
+    "CookieCutterDir": "C:\\PATH\\TO\\COOKIECUTTERS",
+    "ccSettings": {
+        "installRequirements": true,
+        "defaultPackages": ["black", "pylint"]
+    }
 }

@@ -1,0 +1,5 @@
+{
+    "python.pythonPath": "D:\\Programming\\Projects\\dev-env\\win-path\\venv\\Scripts\\Activate.ps1",
+    "python.formatting.provider": "black"
+
+}
