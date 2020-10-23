@@ -1,0 +1,30 @@
+{
+    "ProjectDir": "C:/PATH/TO/PROJECTS",
+    "CookieCutterDir": "C:/PATH/TO/COOKIECUTTER",
+    "pythonScripts": {
+        "ccSettings": {
+            "installRequirements": true,
+            "defaultPackages": [
+                "black",
+                "pylint"
+            ],
+            "githubRepoMode": "Prompt",
+            "useGithubCLI": true
+        }
+    },
+    "pythonVirtualEnvs": {
+        "pythonScripts": "./python-scripts",
+        "powershellScripts": "./windows-scripts",
+        "venvDirectory": "./python-scripts/venvs",
+        "setupList": [
+            {
+                "name": "cc-new.py",
+                "pkgs": [
+                    "cookiecutter",
+                    "tabulate"
+                ],
+                "args": 1
+            }
+        ]
+    }
+}

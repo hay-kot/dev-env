@@ -1,3 +1,5 @@
 # Your Config
 config.json
-./venv
+venv/
+virtual-env/
+venvs/
