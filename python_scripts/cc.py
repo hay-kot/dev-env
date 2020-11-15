@@ -1,4 +1,3 @@
-import json
 import os
 import sys
 from pathlib import Path
@@ -6,7 +5,7 @@ from pathlib import Path
 from cookiecutter.main import cookiecutter
 from tabulate import tabulate
 
-print(sys.executable)
+from my_settings import config
 
 
 def is_hidden(dir_path: Path):
@@ -44,15 +43,11 @@ def select_cookiecutters(cookiecutter_dir: Path) -> dict:
 class AutoCC:
     def __init__(self) -> None:
 
-        # config = CWD.joinpath("config.json")
-        with open(CONFIG, "r") as f:
-            settings = json.load(f)
-
         try:
-            settings = settings["pythonScripts"]
-            self.install_req: bool = settings["ccSettings"]["installRequirements"]
-            self.default_pkg: list = settings["ccSettings"]["defaultPackages"]
-            self.gh_mode: str = settings["ccSettings"]["githubRepoMode"]
+            config.get_script_settings()
+            self.install_req: bool = config.install_req
+            self.default_pkg: list = config.default_pkg
+            self.gh_mode: str = config.gh_mode
             # self.use_gh_cli: bool = settings["ccSettings"]["useGithubCLI"]
         except:
             print("One or more required settings is missing.")
@@ -60,7 +55,7 @@ class AutoCC:
 
     def run_cookiecutter(self, cc: Path):
         if cc.is_dir():
-            new_project = Path(cookiecutter(str(cc), output_dir=PROJECT_DIR))
+            new_project = Path(cookiecutter(str(cc), output_dir=config.project_dir))
             self.make_venv(new_project)
 
             AutoCC.create_repo(new_project)
@@ -84,7 +79,7 @@ class AutoCC:
             print("No Cookie Cutter Found, Sorry!")
 
     def run_from_arg(self, name: str):
-        cc = CC_DIR.joinpath(f"cookiecutter-{name}/")
+        cc = config.cc_dir.joinpath(f"cookiecutter-{name}/")
 
         self.run_cookiecutter(cc)
 
@@ -124,15 +119,6 @@ class AutoCC:
 if __name__ == "__main__":
     CWD = Path(__file__).parent
 
-    CONFIG = CWD.parent.joinpath("config.json")
-
-    with open(CONFIG, "r") as f:
-        settings = json.load(f)
-
-    # Directories
-    PROJECT_DIR = Path(settings["ProjectDir"])
-    CC_DIR = Path(settings["CookieCutterDir"])
-
     auto_cc = AutoCC()
 
     try:
@@ -142,7 +128,7 @@ if __name__ == "__main__":
 
     if ARG != None:
         auto_cc.run_from_arg(ARG)
+    else:
+        selected_tempalte = select_cookiecutters(config.cc_dir)
 
-    selected_tempalte = select_cookiecutters(CC_DIR)
-
-    auto_cc.run_cookiecutter(selected_tempalte)
+        auto_cc.run_cookiecutter(selected_tempalte)

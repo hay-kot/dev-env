@@ -1,7 +1,7 @@
-import json
 import os
 from pathlib import Path
 
+from python_scripts.my_settings import config
 
 class ScriptSetup:
     def __init__(self, json) -> None:
@@ -11,10 +11,10 @@ class ScriptSetup:
         self.args = json["args"]
 
         self.venv = f"./venv-{self.name}"
-        self.python = VENV_DIR.joinpath(f"./{self.venv}/Scripts/python.exe")
+        self.python = config.py_venv_dir.joinpath(f"./{self.venv}/Scripts/python.exe")
 
     def create_venv(self):
-        os.chdir(VENV_DIR)
+        os.chdir(config.py_venv_dir)
         python_path = self.python
 
         requirements = " ".join([str(v) for v in self.packages])
@@ -30,8 +30,8 @@ class ScriptSetup:
             os.system(arg)
 
     def create_ps(self):
-        py_script = PY_SCRIPT_DIR.joinpath(f"{self.name}.py")
-        ps_script = PS_SCRIPT_DIR.joinpath(f"{self.name}.ps1")
+        py_script = config.py_script_dir.joinpath(f"{self.name}.py")
+        ps_script = config.ps_script_dir.joinpath(f"{self.name}.ps1")
 
         template = f"{self.python} {py_script}"
 
@@ -47,17 +47,9 @@ if __name__ == "__main__":
     print("Starting Script Generator")
     CWD = CWD = Path(__file__).parent
 
-    # Set Settings
-    config = CWD.joinpath("config.json")
-    with open(config, "r") as f:
-        settings = json.load(f)
+    config.get_venv_settings()
 
-    PY_SCRIPT_DIR = CWD.joinpath(settings["pythonVirtualEnvs"]["pythonScripts"])
-    PS_SCRIPT_DIR = CWD.joinpath(settings["pythonVirtualEnvs"]["powershellScripts"])
-    VENV_DIR = CWD.joinpath(settings["pythonVirtualEnvs"]["venvDirectory"])
-    SETUP_LIST = settings["pythonVirtualEnvs"]["setupList"]
-
-    for data in SETUP_LIST:
+    for data in config.py_setup_list:
         job = ScriptSetup(data)
 
         job.create_venv()

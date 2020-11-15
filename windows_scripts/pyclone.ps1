@@ -1,5 +1,5 @@
 #!/bin/bash
-# $Repo = $args[0]
+$Repo = $args[0]
 $ScriptDir = Split-Path $MyInvocation.MyCommand.Path -Parent
 Write-Host $ScriptDir
 
